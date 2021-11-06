@@ -1,11 +1,11 @@
 import fs from "fs";
 import path from "path";
-import { Employee } from "./../domain/Employee";
+import { Employee } from "../domain/Employee";
 import { OurDate } from "src/domain/OurDate";
 
-export const FindBirthdayEmployeesService = {
-  findBirthdayEmployees(fileName: string, ourDate: OurDate) {
-    let employees: Array<Employee> = [];
+export const GetEmployeesService = {
+  getEmployees(fileName: string, ourDate: OurDate) {
+    const employees: Employee[] = [];
 
     const data = fs.readFileSync(
       path.resolve(__dirname, `../../resources/${fileName}`),

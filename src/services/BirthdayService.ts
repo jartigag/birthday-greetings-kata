@@ -1,7 +1,7 @@
 import { OurDate } from "./../domain/OurDate";
 import { SendGreetingsService } from "./SendGreetingsService";
 import { EmailServer } from "../infrastructure/EmailServer";
-import { FindBirthdayEmployeesService } from "./FindBirthdayEmployeesService";
+import { GetEmployeesService } from "./GetEmployeesService";
 
 export class BirthdayService {
   greetBirthdayEmployees(
@@ -9,10 +9,7 @@ export class BirthdayService {
     ourDate: OurDate,
     emailServer: EmailServer
   ) {
-    const employees = FindBirthdayEmployeesService.findBirthdayEmployees(
-      fileName,
-      ourDate
-    );
+    const employees = GetEmployeesService.getEmployees(fileName, ourDate);
 
     for (const employee of employees) {
       if (employee.isBirthday(ourDate)) {
