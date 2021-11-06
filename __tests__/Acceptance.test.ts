@@ -21,7 +21,7 @@ describe("Acceptance", () => {
 
   it("base scenario", async () => {
     const emailServer: EmailServer = { host: SMTP_URL, port: SMTP_PORT };
-    service.sendGreetings(
+    service.greetBirthdayEmployees(
       "employee_data.txt",
       new OurDate("2008/10/08"),
       emailServer
@@ -40,7 +40,7 @@ describe("Acceptance", () => {
 
   it("will not send emails when nobodys birthday", async () => {
     const emailServer: EmailServer = { host: SMTP_URL, port: SMTP_PORT };
-    service.sendGreetings(
+    service.greetBirthdayEmployees(
       "employee_data.txt",
       new OurDate("2008/01/01"),
       emailServer
