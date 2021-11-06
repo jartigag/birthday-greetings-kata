@@ -65,7 +65,6 @@ export class BirthdayService {
       text: body,
     };
 
-    const messageService = new MessageService();
-    messageService.deliveryMessage(message);
+    MessageService.deliveryMessage(message);
   }
 }
