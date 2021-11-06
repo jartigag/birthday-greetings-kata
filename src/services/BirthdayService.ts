@@ -1,10 +1,8 @@
 import fs from "fs";
 import path from "path";
-import nodemailer from "nodemailer";
 import { Employee } from "./../domain/Employee";
 import { OurDate } from "./../domain/OurDate";
-import Mail from "nodemailer/lib/mailer";
-import SMTPTransport from "nodemailer/lib/smtp-transport";
+import { MessageService } from "./MessageService";
 
 export class BirthdayService {
   sendGreetings(
@@ -67,15 +65,7 @@ export class BirthdayService {
       text: body,
     };
 
-    this.deliveryMessage(message);
-  }
-
-  // made protected for testing :-(
-  protected async deliveryMessage({ host, port, ...msg }: Message) {
-    const transport = nodemailer.createTransport({ host, port });
-
-    await transport.sendMail(msg);
+    const messageService = new MessageService();
+    messageService.deliveryMessage(message);
   }
 }
-
-export interface Message extends SMTPTransport.Options, Mail.Options {}
