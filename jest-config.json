@@ -4,6 +4,6 @@
   "transform": {
     "\\.(ts|tsx)$": "ts-jest"
   },
-  "roots": ["<rootDir>/test", "<rootDir>/src"],
+  "roots": ["<rootDir>/__tests__", "<rootDir>/src"],
   "testRegex": ".*\\.test\\.ts$"
 }
