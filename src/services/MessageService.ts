@@ -1,13 +1,11 @@
-import nodemailer from "nodemailer";
-import Mail from "nodemailer/lib/mailer";
-import SMTPTransport from "nodemailer/lib/smtp-transport";
+import { EmailService, Email } from "../infrastructure/EmailService";
 
-export interface Message extends SMTPTransport.Options, Mail.Options {}
+export interface Message {
+  email: Email;
+}
 
 export const MessageService = {
-  async deliveryMessage({ host, port, ...msg }: Message) {
-    const transport = nodemailer.createTransport({ host, port });
-
-    await transport.sendMail(msg);
+  async deliveryMessage(email: Email) {
+    await EmailService.sendEmail(email);
   },
 };

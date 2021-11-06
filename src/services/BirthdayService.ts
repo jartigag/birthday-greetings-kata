@@ -3,14 +3,10 @@ import path from "path";
 import { Employee } from "./../domain/Employee";
 import { OurDate } from "./../domain/OurDate";
 import { MessageService } from "./MessageService";
+import { EmailServer } from "../infrastructure/EmailServer";
 
 export class BirthdayService {
-  sendGreetings(
-    fileName: string,
-    ourDate: OurDate,
-    smtpHost: string,
-    smtpPort: number
-  ) {
+  sendGreetings(fileName: string, ourDate: OurDate, emailServer: EmailServer) {
     const data = fs.readFileSync(
       path.resolve(__dirname, `../../resources/${fileName}`),
       "UTF-8"
@@ -37,8 +33,7 @@ export class BirthdayService {
         );
         const subject = "Happy Birthday!";
         this.sendMessage(
-          smtpHost,
-          smtpPort,
+          emailServer,
           "sender@here.com",
           subject,
           body,
@@ -49,16 +44,14 @@ export class BirthdayService {
   }
 
   async sendMessage(
-    smtpHost: string,
-    smtpPort: number,
+    emailServer: EmailServer,
     sender: string,
     subject: string,
     body: string,
     recipient: string
   ) {
     const message = {
-      host: smtpHost,
-      port: smtpPort,
+      emailServer,
       from: sender,
       to: [recipient],
       subject,

@@ -2,6 +2,7 @@ import { OurDate } from "../src/domain/OurDate";
 import { BirthdayService } from "../src/services/BirthdayService";
 import { messagesSent, startMailhog, stopMailHog } from "./mailhog";
 import flushPromises from "flush-promises";
+import { EmailServer } from "../src/infrastructure/EmailServer";
 
 describe("Acceptance", () => {
   const SMTP_PORT = 1025;
@@ -19,11 +20,11 @@ describe("Acceptance", () => {
   });
 
   it("base scenario", async () => {
+    const emailServer: EmailServer = { host: SMTP_URL, port: SMTP_PORT };
     service.sendGreetings(
       "employee_data.txt",
       new OurDate("2008/10/08"),
-      SMTP_URL,
-      SMTP_PORT
+      emailServer
     );
     await flushPromises();
 
@@ -38,11 +39,11 @@ describe("Acceptance", () => {
   });
 
   it("will not send emails when nobodys birthday", async () => {
+    const emailServer: EmailServer = { host: SMTP_URL, port: SMTP_PORT };
     service.sendGreetings(
       "employee_data.txt",
       new OurDate("2008/01/01"),
-      SMTP_URL,
-      SMTP_PORT
+      emailServer
     );
     await flushPromises();
 
