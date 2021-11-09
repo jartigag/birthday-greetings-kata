@@ -3,6 +3,7 @@ import { OurDate } from "@domain/OurDate";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 import { CSVEmployeesRepository } from "@infrastructure/CSVEmployeesRepository";
+import { Employee } from "@domain/Employee";
 
 export class BirthdayService {
   sendGreetings(
@@ -11,27 +12,29 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
+    const greetEmployees = (employeesToGreet: Employee[]) => {
+      employeesToGreet.forEach((employee) => {
+        const recipient = employee.getEmail();
+        const body = "Happy Birthday, dear %NAME%!".replace(
+          "%NAME%",
+          employee.getFirstName()
+        );
+        const subject = "Happy Birthday!";
+        this.sendMessage(
+          smtpHost,
+          smtpPort,
+          "sender@here.com",
+          subject,
+          body,
+          recipient
+        );
+      });
+    };
     const birthdayEmployees = CSVEmployeesRepository.getEmployeesByBirthDate(
       fileName,
       ourDate
     );
-
-    birthdayEmployees.forEach((employee) => {
-      const recipient = employee.getEmail();
-      const body = "Happy Birthday, dear %NAME%!".replace(
-        "%NAME%",
-        employee.getFirstName()
-      );
-      const subject = "Happy Birthday!";
-      this.sendMessage(
-        smtpHost,
-        smtpPort,
-        "sender@here.com",
-        subject,
-        body,
-        recipient
-      );
-    });
+    greetEmployees(birthdayEmployees);
   }
 
   async sendMessage(
