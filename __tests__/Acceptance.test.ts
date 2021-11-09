@@ -1,11 +1,12 @@
 import { OurDate } from "@domain/OurDate";
-import { BirthdayService } from "../src/BirthdayService";
+import { BirthdayService } from "@services/BirthdayService";
 import { messagesSent, startMailhog, stopMailHog } from "./mailhog";
 import flushPromises from "flush-promises";
 
 describe("Acceptance", () => {
   const SMTP_PORT = 1025;
   const SMTP_URL = "127.0.0.1";
+  const FILENAME = "employee_data.txt";
   let service: BirthdayService;
 
   beforeEach(() => {
@@ -20,7 +21,7 @@ describe("Acceptance", () => {
 
   it("base scenario", async () => {
     service.sendGreetings(
-      "employee_data.txt",
+      FILENAME,
       new OurDate("2008/10/08"),
       SMTP_URL,
       SMTP_PORT
