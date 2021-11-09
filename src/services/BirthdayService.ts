@@ -1,16 +1,14 @@
 import { OurDate } from "./../domain/OurDate";
 import { SendGreetingsService } from "./SendGreetingsService";
 import { EmailServer } from "../infrastructure/EmailServer";
-import { GetEmployeesService } from "./GetEmployeesService";
+import { Employee } from "../domain/Employee";
 
 export class BirthdayService {
   greetBirthdayEmployees(
-    fileName: string,
+    employees: Employee[],
     ourDate: OurDate,
     emailServer: EmailServer
   ) {
-    const employees = GetEmployeesService.getEmployees(fileName, ourDate);
-
     for (const employee of employees) {
       if (employee.isBirthday(ourDate)) {
         SendGreetingsService.sendGreetings(employee, emailServer);
