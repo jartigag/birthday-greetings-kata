@@ -1,7 +1,7 @@
-import { OurDate } from "./../domain/OurDate";
-import { SendGreetingsService } from "./SendGreetingsService";
-import { EmailServer } from "../infrastructure/EmailServer";
-import { Employee } from "../domain/Employee";
+import { OurDate } from "@domain/OurDate";
+import { SendGreetingsService } from "@services/SendGreetingsService";
+import { EmailServer } from "@infrastructure/EmailServer";
+import { Employee } from "@domain/Employee";
 
 export class BirthdayService {
   greetBirthdayEmployees(

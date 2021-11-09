@@ -1,10 +1,10 @@
-import { OurDate } from "../src/domain/OurDate";
-import { BirthdayService } from "../src/services/BirthdayService";
+import { OurDate } from "@domain/OurDate";
+import { BirthdayService } from "@services/BirthdayService";
 import { messagesSent, startMailhog, stopMailHog } from "./mailhog";
 import flushPromises from "flush-promises";
-import { EmailServer } from "../src/infrastructure/EmailServer";
+import { EmailServer } from "@infrastructure/EmailServer";
 
-import { EmployeesRepository } from "../src/services/EmployeeRepository";
+import { EmployeesRepository } from "@domain/EmployeeRepository";
 
 describe("Acceptance", () => {
   const SMTP_PORT = 1025;

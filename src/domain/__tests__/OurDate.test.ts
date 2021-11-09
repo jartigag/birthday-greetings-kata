@@ -1,4 +1,4 @@
-import { OurDate } from "../../domain/OurDate";
+import { OurDate } from "@domain/OurDate";
 
 describe("OurDate", () => {
   it("getters", () => {

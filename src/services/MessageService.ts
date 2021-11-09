@@ -1,4 +1,4 @@
-import { EmailService, Email } from "../infrastructure/EmailService";
+import { EmailService, Email } from "@infrastructure/EmailService";
 
 export interface Message {
   email: Email;
