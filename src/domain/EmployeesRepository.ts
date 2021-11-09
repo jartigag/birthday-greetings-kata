@@ -2,7 +2,11 @@ import fs from "fs";
 import path from "path";
 import { Employee } from "@domain/Employee";
 
-export class EmployeesRepository {
+export interface EmployeesRepository {
+  loadEmployees: Employee[];
+}
+
+export const EmployeesRepository = {
   loadEmployees(fileName: string) {
     const employees: Employee[] = [];
 
@@ -29,5 +33,5 @@ export class EmployeesRepository {
     });
 
     return employees;
-  }
-}
+  },
+};

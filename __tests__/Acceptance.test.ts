@@ -4,7 +4,7 @@ import { messagesSent, startMailhog, stopMailHog } from "./mailhog";
 import flushPromises from "flush-promises";
 import { EmailServer } from "@infrastructure/EmailServer";
 
-import { EmployeesRepository } from "@domain/EmployeeRepository";
+import { EmployeesRepository } from "@domain/EmployeesRepository";
 
 describe("Acceptance", () => {
   const SMTP_PORT = 1025;
@@ -24,8 +24,7 @@ describe("Acceptance", () => {
   it("base scenario", async () => {
     const emailServer: EmailServer = { host: SMTP_URL, port: SMTP_PORT };
 
-    const employeesRepository = new EmployeesRepository();
-    const employees = employeesRepository.loadEmployees("employee_data.txt");
+    const employees = EmployeesRepository.loadEmployees("employee_data.txt");
 
     service.greetBirthdayEmployees(
       employees,
@@ -47,8 +46,7 @@ describe("Acceptance", () => {
   it("will not send emails when nobodys birthday", async () => {
     const emailServer: EmailServer = { host: SMTP_URL, port: SMTP_PORT };
 
-    const employeesRepository = new EmployeesRepository();
-    const employees = employeesRepository.loadEmployees("employee_data.txt");
+    const employees = EmployeesRepository.loadEmployees("employee_data.txt");
 
     service.greetBirthdayEmployees(
       employees,
