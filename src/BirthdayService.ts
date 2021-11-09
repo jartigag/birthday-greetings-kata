@@ -13,7 +13,7 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
-    function loadEmployeesData(employeesFileName: string) {
+    function loadEmployees(employeesFileName: string) {
       const employeesData = fs.readFileSync(
         path.resolve(__dirname, `../resources/${employeesFileName}`),
         "UTF-8"
@@ -23,20 +23,27 @@ export class BirthdayService {
       const lines = employeesData.split(/\r?\n/);
       lines.shift();
 
-      return lines;
+      const employees: Employee[] = [];
+
+      // print all lines
+      lines.forEach((line) => {
+        const employeeData = line.split(", ");
+        employees.push(
+          new Employee(
+            employeeData[1],
+            employeeData[0],
+            employeeData[2],
+            employeeData[3]
+          )
+        );
+      });
+
+      return employees;
     }
 
-    const lines = loadEmployeesData(fileName);
+    const employees = loadEmployees(fileName);
 
-    // print all lines
-    lines.forEach((line) => {
-      const employeeData = line.split(", ");
-      const employee = new Employee(
-        employeeData[1],
-        employeeData[0],
-        employeeData[2],
-        employeeData[3]
-      );
+    employees.forEach((employee) => {
       if (employee.isBirthday(ourDate)) {
         const recipient = employee.getEmail();
         const body = "Happy Birthday, dear %NAME%!".replace(
