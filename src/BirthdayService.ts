@@ -18,14 +18,15 @@ export class BirthdayService {
         path.resolve(__dirname, `../resources/${employeesFileName}`),
         "UTF-8"
       );
-      return employeesData;
+
+      // split the contents by new line
+      const lines = employeesData.split(/\r?\n/);
+      lines.shift();
+
+      return lines;
     }
 
-    const data = loadEmployeesData(fileName);
-
-    // split the contents by new line
-    const lines = data.split(/\r?\n/);
-    lines.shift();
+    const lines = loadEmployeesData(fileName);
 
     // print all lines
     lines.forEach((line) => {
