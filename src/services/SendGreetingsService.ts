@@ -1,6 +1,6 @@
 import { Employee } from "@domain/Employee";
 import { EmailServer } from "@infrastructure/EmailServer";
-import { MessageService } from "@services/SendGreetingsService";
+import { MessageService } from "@services/MessageService";
 
 export const SendGreetingsService = {
   sendGreetings(employee: Employee, emailServer: EmailServer) {
