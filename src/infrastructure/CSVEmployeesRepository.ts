@@ -2,9 +2,10 @@ import fs from "fs";
 import path from "path";
 import { Employee } from "@domain/Employee";
 import { EmployeesRepository } from "@domain/EmployeesRepository";
+import { OurDate } from "@domain/OurDate";
 
 export const CSVEmployeesRepository: EmployeesRepository = {
-  loadEmployees(fileName: string): Employee[] {
+  getEmployeesByBirthDate(fileName: string, birthDate: OurDate): Employee[] {
     const data = fs.readFileSync(
       path.resolve(__dirname, `../../resources/${fileName}`),
       "UTF-8"
@@ -25,8 +26,8 @@ export const CSVEmployeesRepository: EmployeesRepository = {
             employeeData[2],
             employeeData[3]
           )
-      );
-
+      )
+      .filter((employee) => employee.isBirthday(birthDate));
     return employees;
   },
 };

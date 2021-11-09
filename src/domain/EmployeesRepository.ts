@@ -1,5 +1,6 @@
 import { Employee } from "@domain/Employee";
+import { OurDate } from "./OurDate";
 
 export interface EmployeesRepository {
-  loadEmployees: (fileName: string) => Employee[];
+  getEmployeesByBirthDate: (fileName: string, birthDate: OurDate) => Employee[];
 }

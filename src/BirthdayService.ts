@@ -11,7 +11,10 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
-    const employees = CSVEmployeesRepository.loadEmployees(fileName);
+    const employees = CSVEmployeesRepository.getEmployeesByBirthDate(
+      fileName,
+      ourDate
+    );
 
     employees.forEach((employee) => {
       if (employee.isBirthday(ourDate)) {
