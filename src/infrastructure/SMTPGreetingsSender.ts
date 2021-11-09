@@ -6,6 +6,7 @@ import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 export interface Message extends SMTPTransport.Options, Mail.Options {}
 
+//TODO: support this.sendMessage using the GreetingsSender interface
 //export const SMTPGreetingsSender: GreetingsSender = {
 export const SMTPGreetingsSender = {
   sendGreetingsToEmployee: function (employee: Employee): void {
@@ -45,6 +46,7 @@ export const SMTPGreetingsSender = {
     //this.deliveryMessage(message);
     nodemailer
       .createTransport({ host: "127.0.0.1", port: 1025 })
+      //                 FIXME: ^^^^^^^^^ ,       ^^^^
       .sendMail(message);
   },
 };

@@ -1,6 +1,6 @@
 import { OurDate } from "@domain/OurDate";
-import { CSVEmployeesRepository } from "@infrastructure/CSVEmployeesRepository";
-import { SMTPGreetingsSender } from "@infrastructure/SMTPGreetingsSender";
+import { CSVEmployeesRepository } from "@infrastructure/CSVEmployeesRepository"; //TODO: change by @domain/EmployeesRepository
+import { SMTPGreetingsSender } from "@infrastructure/SMTPGreetingsSender"; //TODO: change by @domain/GreetingsSender
 
 export class BirthdayService {
   sendGreetings(
