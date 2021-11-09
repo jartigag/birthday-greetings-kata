@@ -4,6 +4,11 @@
   "transform": {
     "\\.(ts|tsx)$": "ts-jest"
   },
-  "roots": ["<rootDir>/test", "<rootDir>/src"],
-  "testRegex": ".*\\.test\\.ts$"
+  "roots": ["<rootDir>/__tests__", "<rootDir>/src"],
+  "testRegex": ".*\\.test\\.ts$",
+  "moduleNameMapper": {
+    "^@domain/(.*)$": "<rootDir>/src/domain/$1",
+    "^@infrastructure/(.*)$": "<rootDir>/src/infrastructure/$1",
+    "^@services/(.*)$": "<rootDir>/src/services/$1"
+  }
 }

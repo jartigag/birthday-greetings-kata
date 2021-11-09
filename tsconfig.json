@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "src",
+    "paths": {
+      "@domain/*": ["domain/*"],
+      "@infrastructure/*": ["infrastructure/*"],
+      "@services/*": ["services/*"]
+    },
     "outDir": "build/dist",
     "module": "esnext",
     "target": "es5",
@@ -19,7 +24,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "test/**/*.ts"
+    "__tests__/**/*.ts"
   ],
   "exclude": [
     "node_modules",
