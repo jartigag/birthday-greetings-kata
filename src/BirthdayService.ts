@@ -1,10 +1,8 @@
-import fs from "fs";
-import path from "path";
 import nodemailer from "nodemailer";
-import { Employee } from "@domain/Employee";
 import { OurDate } from "@domain/OurDate";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
+import { CSVEmployeesRepository } from "@infrastructure/CSVEmployeesRepository";
 
 export class BirthdayService {
   sendGreetings(
@@ -13,35 +11,7 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
-    function loadEmployees(employeesFileName: string) {
-      const employeesData = fs.readFileSync(
-        path.resolve(__dirname, `../resources/${employeesFileName}`),
-        "UTF-8"
-      );
-
-      // split the contents by new line
-      const lines = employeesData.split(/\r?\n/);
-      lines.shift();
-
-      const employees: Employee[] = [];
-
-      // print all lines
-      lines.forEach((line) => {
-        const employeeData = line.split(", ");
-        employees.push(
-          new Employee(
-            employeeData[1],
-            employeeData[0],
-            employeeData[2],
-            employeeData[3]
-          )
-        );
-      });
-
-      return employees;
-    }
-
-    const employees = loadEmployees(fileName);
+    const employees = CSVEmployeesRepository.loadEmployees(fileName);
 
     employees.forEach((employee) => {
       if (employee.isBirthday(ourDate)) {
