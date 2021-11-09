@@ -5,8 +5,6 @@ import { EmployeesRepository } from "@domain/EmployeesRepository";
 
 export const CSVEmployeesRepository: EmployeesRepository = {
   loadEmployees(fileName: string): Employee[] {
-    const employees: Employee[] = [];
-
     const data = fs.readFileSync(
       path.resolve(__dirname, `../../resources/${fileName}`),
       "UTF-8"
@@ -16,18 +14,18 @@ export const CSVEmployeesRepository: EmployeesRepository = {
     const lines = data.split(/\r?\n/);
     lines.shift();
 
-    // print all lines
-    lines.forEach((line) => {
-      const employeeData = line.split(", ");
-      employees.push(
-        new Employee(
-          employeeData[1],
-          employeeData[0],
-          employeeData[2],
-          employeeData[3]
-        )
+    // create employee
+    const employees = lines
+      .map((line) => line.split(", "))
+      .map(
+        (employeeData) =>
+          new Employee(
+            employeeData[1],
+            employeeData[0],
+            employeeData[2],
+            employeeData[3]
+          )
       );
-    });
 
     return employees;
   },
