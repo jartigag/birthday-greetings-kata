@@ -1,12 +1,17 @@
 import { OurDate } from "@domain/OurDate";
 import { EmployeesRepository } from "@domain/EmployeesRepository";
-import { SMTPGreetingsSender } from "@infrastructure/SMTPGreetingsSender";
+import { GreetingsSender } from "@domain/GreetingsSender";
 
 export class BirthdayService {
   employeesRepository: EmployeesRepository;
+  greetingsSender: GreetingsSender;
 
-  constructor(employeesRepository: EmployeesRepository) {
+  constructor(
+    employeesRepository: EmployeesRepository,
+    greetingsSender: GreetingsSender
+  ) {
     this.employeesRepository = employeesRepository;
+    this.greetingsSender = greetingsSender;
   }
 
   sendGreetings(
@@ -20,7 +25,7 @@ export class BirthdayService {
       ourDate
     );
     birthdayEmployees.forEach((employee) => {
-      SMTPGreetingsSender.sendGreetingsToEmployee(employee);
+      this.greetingsSender.sendGreetingsToEmployee(employee);
     });
   }
 }

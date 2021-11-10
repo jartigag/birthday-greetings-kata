@@ -3,6 +3,7 @@ import { BirthdayService } from "@services/BirthdayService";
 import { messagesSent, startMailhog, stopMailHog } from "./mailhog";
 import flushPromises from "flush-promises";
 import { CSVEmployeesRepository } from "@infrastructure/CSVEmployeesRepository";
+import { SMTPGreetingsSender } from "@infrastructure/SMTPGreetingsSender";
 
 describe("Acceptance", () => {
   const SMTP_PORT = 1025;
@@ -13,7 +14,7 @@ describe("Acceptance", () => {
   beforeEach(() => {
     startMailhog();
 
-    service = new BirthdayService(CSVEmployeesRepository);
+    service = new BirthdayService(CSVEmployeesRepository, SMTPGreetingsSender);
   });
 
   afterEach(() => {
