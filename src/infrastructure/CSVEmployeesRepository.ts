@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { Employee } from "@domain/Employee";
 import { EmployeesRepository } from "@domain/EmployeesRepository";
+import { Employee } from "@domain/Employee";
 import { OurDate } from "@domain/OurDate";
 
 export const CSVEmployeesRepository: EmployeesRepository = {

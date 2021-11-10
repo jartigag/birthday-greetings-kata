@@ -1,15 +1,21 @@
 import { OurDate } from "@domain/OurDate";
-import { CSVEmployeesRepository } from "@infrastructure/CSVEmployeesRepository"; //TODO: change by @domain/EmployeesRepository
-import { SMTPGreetingsSender } from "@infrastructure/SMTPGreetingsSender"; //TODO: change by @domain/GreetingsSender
+import { EmployeesRepository } from "@domain/EmployeesRepository";
+import { SMTPGreetingsSender } from "@infrastructure/SMTPGreetingsSender";
 
 export class BirthdayService {
+  employeesRepository: EmployeesRepository;
+
+  constructor(employeesRepository: EmployeesRepository) {
+    this.employeesRepository = employeesRepository;
+  }
+
   sendGreetings(
     fileName: string,
     ourDate: OurDate,
     smtpHost: string,
     smtpPort: number
   ) {
-    const birthdayEmployees = CSVEmployeesRepository.getEmployeesByBirthDate(
+    const birthdayEmployees = this.employeesRepository.getEmployeesByBirthDate(
       fileName,
       ourDate
     );
